@@ -53,6 +53,17 @@
           <xsl:value-of select="translate($outroot, '\/.', '___')"/>
         </xsl:attribute>
       </xsl:if>
+          <xsl:if test="@copy-to">
+               <xsl:attribute name="target">
+               <xsl:value-of select="translate(substring-before(@copy-to, '.dita'), '\/.', '___')"/>     
+          </xsl:attribute>
+      </xsl:if>
+          
+          <xsl:if test="@navtitle"> <!-- Should probably be combined with locktitle attribute, but this saves time for editor -->
+            <xsl:attribute name="text">
+            <xsl:value-of select="@navtitle"/>     
+          </xsl:attribute>
+      </xsl:if>
       <xsl:apply-templates select="$subtopicNodes"/>
     </tocitem>
   </xsl:when>
